@@ -56,10 +56,10 @@ These guardrails prevent "hallucinations" or fabricated data, ensuring all respo
 ### Prerequisites
 
 - Python 3.10+
-- SQLite3
+- SQLite3 (built into Python)
 - OpenAI API key
 
-### Setup
+### Step-by-Step Setup
 
 1. Clone the repository:
    ```bash
@@ -72,32 +72,69 @@ These guardrails prevent "hallucinations" or fabricated data, ensuring all respo
    pip install -r requirements.txt
    ```
 
-3. Set your OpenAI API key:
+3. For better performance, install Watchdog:
    ```bash
-   export OPENAI_API_KEY="your-api-key-here"
-   ```
+   # On macOS
+   xcode-select --install
+   pip install watchdog
    
-   For Windows:
-   ```cmd
+   # On Linux
+   pip install watchdog
+   
+   # On Windows
+   pip install watchdog
+   ```
+
+4. Set your OpenAI API key:
+   ```bash
+   # Linux/macOS
+   export OPENAI_API_KEY="your-api-key-here"
+   
+   # Windows (Command Prompt)
    set OPENAI_API_KEY=your-api-key-here
+   
+   # Windows (PowerShell)
+   $env:OPENAI_API_KEY="your-api-key-here"
+   ```
+
+   Alternatively, create a `.env` file in the project root:
+   ```
+   OPENAI_API_KEY=your-api-key-here
    ```
 
 ## Usage
 
-### Running the Streamlit App
+### Launching the Streamlit App
 
-1. Launch the Streamlit web interface:
-   ```bash
-   python run_streamlit.py
-   ```
+Run the following command from the project root directory:
 
-2. Open your browser and navigate to the URL displayed in the console (typically http://localhost:8501)
+```bash
+python run_streamlit.py
+```
 
-3. Upload a SMITE 2 combat log file using the upload button in the sidebar
+This will start the Streamlit web interface. You should see output similar to:
 
-4. Type your question in the input field and press Enter
+```
+You can now view your Streamlit app in your browser.
+Local URL: http://localhost:8501
+Network URL: http://192.168.x.x:8501
+```
 
-5. Review the response and explore suggested follow-up questions
+Open your browser and navigate to http://localhost:8501 to access the application.
+
+### Uploading Combat Log Files
+
+1. Once the app is running, look for the **Upload Combat Log File** option in the sidebar
+2. Click the "Browse files" button to select a SMITE 2 combat log file (`.log` or `.txt` format)
+3. After selecting the file, click the "Process Log File" button
+4. Wait for the processing to complete - you'll see a success message when done
+
+### Asking Questions
+
+1. After processing a log file, use the chat interface at the bottom of the page
+2. Type your question (e.g., "Who dealt the most damage?") and press Enter
+3. The system will process your question and display the answer
+4. You can click on suggested follow-up questions or ask new questions
 
 ### Using the SQL Query Tool
 
@@ -138,6 +175,48 @@ Here are some example questions you can ask:
 - "What abilities did the top player use most frequently?"
 - "Compare the damage output of the top 3 players"
 - "How did damage distribution change throughout the match phases?"
+
+## Deployment
+
+The SMITE 2 Combat Log Agent can be deployed in various environments:
+
+### Local Development
+
+Follow the installation and usage instructions above for local development and testing.
+
+### Server Deployment
+
+For deploying to a server environment:
+
+1. Clone the repository on your server
+2. Install dependencies with `pip install -r requirements.txt`
+3. Set up your OpenAI API key as an environment variable
+4. Run the app with:
+   ```bash
+   python run_streamlit.py
+   ```
+
+5. For production deployments, consider running behind a reverse proxy like Nginx
+
+### Docker Deployment
+
+A Dockerfile is provided for containerized deployment:
+
+```bash
+# Build the Docker image
+docker build -t smite2-agent .
+
+# Run the container
+docker run -p 8501:8501 -e OPENAI_API_KEY="your-api-key-here" smite2-agent
+```
+
+### Environment Variables
+
+The following environment variables can be configured:
+
+- `OPENAI_API_KEY`: Required for OpenAI API access
+- `PORT`: Optional, to customize the port (default: 8501)
+- `DEBUG`: Optional, set to "1" to enable debug mode
 
 ## Technical Details
 
@@ -193,6 +272,14 @@ pip install --upgrade streamlit
 
 Note: In newer Streamlit versions, `st.experimental_rerun()` has been replaced with `st.rerun()`.
 
+### OpenAI API Key Issues
+
+If you see authentication errors:
+
+1. Verify your API key is correctly set as an environment variable
+2. Check that your OpenAI account has sufficient credits
+3. Ensure your API key has the appropriate permissions
+
 ### Excel Export Issues
 
 If you encounter errors when exporting to Excel:
@@ -208,6 +295,19 @@ If the application cannot find the database:
 1. Check the console log for the actual database path
 2. Verify the combat log file was processed successfully
 3. Try uploading and processing the file again
+
+### Watchdog Installation
+
+For optimal performance, install the Watchdog module:
+
+```bash
+# On macOS
+xcode-select --install
+pip install watchdog
+
+# On other platforms
+pip install watchdog
+```
 
 ## Future Development
 
