@@ -21,8 +21,8 @@ xlsxwriter
 # sqlite3                     # Built into Python, no pip install needed
 
 # OpenAI Agents SDK
-openai-agents>=1.0.0          # OpenAI Agents SDK (March 2025)
-agents-tracing>=1.0.0         # Tracing for Agents SDK
+openai-agents>=0.0.7          # OpenAI Agents SDK (using latest available version)
+# agents-tracing>=1.0.0       # Commented out as this may have similar version issues
 
 # Excel and data export
 openpyxl>=3.1.2               # Excel file handling

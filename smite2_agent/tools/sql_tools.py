@@ -175,8 +175,9 @@ def format_as_csv(rows: List[Dict[str, Any]]) -> str:
             if value is None:
                 value = ""
             else:
-                # Escape quotes in the value
-                value = f'"{str(value).replace("\"", "\\\"")}"'
+                # Escape quotes in the value - fix for Python 3.10+ compatibility
+                escaped_value = str(value).replace('"', '\\"')
+                value = f'"{escaped_value}"'
             values.append(value)
         data_rows.append(",".join(values))
     

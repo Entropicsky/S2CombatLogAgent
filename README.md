@@ -200,23 +200,59 @@ For deploying to a server environment:
 
 ### Docker Deployment
 
-A Dockerfile is provided for containerized deployment:
+You can easily deploy the SMITE 2 Combat Log Agent using Docker:
+
+### Prerequisites for Docker Deployment
+
+- [Docker](https://docs.docker.com/get-docker/) installed on your system
+- [Docker Compose](https://docs.docker.com/compose/install/) installed on your system
+- A valid OpenAI API key
+
+### Quick Docker Start
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/YourUsername/S2CombatLogAgent.git
+   cd S2CombatLogAgent
+   ```
+
+2. Set up your OpenAI API key:
+   ```bash
+   echo "OPENAI_API_KEY=your-api-key-here" > .env
+   ```
+
+3. Start the application using Docker Compose:
+   ```bash
+   docker-compose up -d
+   ```
+
+4. Access the Streamlit web interface at:
+   ```
+   http://localhost:8501
+   ```
+
+5. To stop the application:
+   ```bash
+   docker-compose down
+   ```
+
+### Manual Docker Build
+
+If you prefer to build and run the Docker container manually:
 
 ```bash
 # Build the Docker image
 docker build -t smite2-agent .
 
-# Run the container
-docker run -p 8501:8501 -e OPENAI_API_KEY="your-api-key-here" smite2-agent
+# Run the Docker container
+docker run -p 8501:8501 \
+  -v $(pwd)/data:/app/data \
+  -v $(pwd)/.env:/app/.env \
+  -e OPENAI_API_KEY="your-api-key-here" \
+  smite2-agent
 ```
 
-### Environment Variables
-
-The following environment variables can be configured:
-
-- `OPENAI_API_KEY`: Required for OpenAI API access
-- `PORT`: Optional, to customize the port (default: 8501)
-- `DEBUG`: Optional, set to "1" to enable debug mode
+For more detailed Docker deployment instructions, see the [Docker Deployment Guide](README_DOCKER.md).
 
 ## Technical Details
 
