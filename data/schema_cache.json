@@ -1,0 +1,1528 @@
+{
+  "matches": {
+    "columns": [
+      {
+        "name": "match_id",
+        "type": "VARCHAR",
+        "notnull": true,
+        "pk": true,
+        "default": null
+      },
+      {
+        "name": "source_file",
+        "type": "VARCHAR",
+        "notnull": true,
+        "pk": false,
+        "default": null
+      },
+      {
+        "name": "map_name",
+        "type": "VARCHAR",
+        "notnull": false,
+        "pk": false,
+        "default": null
+      },
+      {
+        "name": "game_type",
+        "type": "VARCHAR",
+        "notnull": false,
+        "pk": false,
+        "default": null
+      },
+      {
+        "name": "start_time",
+        "type": "DATETIME",
+        "notnull": false,
+        "pk": false,
+        "default": null
+      },
+      {
+        "name": "end_time",
+        "type": "DATETIME",
+        "notnull": false,
+        "pk": false,
+        "default": null
+      },
+      {
+        "name": "duration_seconds",
+        "type": "INTEGER",
+        "notnull": false,
+        "pk": false,
+        "default": null
+      },
+      {
+        "name": "match_data",
+        "type": "TEXT",
+        "notnull": false,
+        "pk": false,
+        "default": null
+      }
+    ],
+    "foreign_keys": [],
+    "sample_data": [
+      {
+        "match_id": "match-CombatLogExample",
+        "source_file": "CombatLogExample",
+        "map_name": "Unknown Map",
+        "game_type": "Unknown Mode",
+        "start_time": "2025-03-19 03:38:15.000000",
+        "end_time": "2025-03-19 04:09:57.000000",
+        "duration_seconds": 1902,
+        "match_data": "{\"match_id\": null, \"map_name\": \"Unknown Map\", \"game_type\": \"Unknown Mode\", \"start_time\": \"2025-03-19T03:38:15\", \"end_time\": \"2025-03-19T04:09:57\"}"
+      }
+    ]
+  },
+  "items": {
+    "columns": [
+      {
+        "name": "item_id",
+        "type": "INTEGER",
+        "notnull": true,
+        "pk": true,
+        "default": null
+      },
+      {
+        "name": "item_name",
+        "type": "VARCHAR",
+        "notnull": true,
+        "pk": false,
+        "default": null
+      },
+      {
+        "name": "item_type",
+        "type": "VARCHAR",
+        "notnull": false,
+        "pk": false,
+        "default": null
+      }
+    ],
+    "foreign_keys": [],
+    "sample_data": [
+      {
+        "item_id": 140,
+        "item_name": "Adamantine Sickle",
+        "item_type": "Item"
+      },
+      {
+        "item_id": 141,
+        "item_name": "Axe",
+        "item_type": "Item"
+      },
+      {
+        "item_id": 143,
+        "item_name": "Obsidian Shard",
+        "item_type": "Item"
+      },
+      {
+        "item_id": 144,
+        "item_name": "Demon Blade",
+        "item_type": "Item"
+      },
+      {
+        "item_id": 145,
+        "item_name": "Battle Axe",
+        "item_type": "Item"
+      }
+    ]
+  },
+  "players": {
+    "columns": [
+      {
+        "name": "player_id",
+        "type": "INTEGER",
+        "notnull": true,
+        "pk": true,
+        "default": null
+      },
+      {
+        "name": "match_id",
+        "type": "VARCHAR",
+        "notnull": false,
+        "pk": false,
+        "default": null
+      },
+      {
+        "name": "player_name",
+        "type": "VARCHAR",
+        "notnull": true,
+        "pk": false,
+        "default": null
+      },
+      {
+        "name": "team_id",
+        "type": "INTEGER",
+        "notnull": false,
+        "pk": false,
+        "default": null
+      },
+      {
+        "name": "role",
+        "type": "VARCHAR",
+        "notnull": false,
+        "pk": false,
+        "default": null
+      },
+      {
+        "name": "god_id",
+        "type": "INTEGER",
+        "notnull": false,
+        "pk": false,
+        "default": null
+      },
+      {
+        "name": "god_name",
+        "type": "VARCHAR",
+        "notnull": false,
+        "pk": false,
+        "default": null
+      }
+    ],
+    "foreign_keys": [
+      {
+        "from": "match_id",
+        "to": "match_id",
+        "table": "matches"
+      }
+    ],
+    "sample_data": [
+      {
+        "player_id": 1,
+        "match_id": "match-CombatLogExample",
+        "player_name": "Shaka239",
+        "team_id": 1,
+        "role": "Jungle",
+        "god_id": 13,
+        "god_name": "Fenrir"
+      },
+      {
+        "player_id": 2,
+        "match_id": "match-CombatLogExample",
+        "player_name": "psychotic8BALL",
+        "team_id": 1,
+        "role": "Carry",
+        "god_id": 325,
+        "god_name": "Rama"
+      },
+      {
+        "player_id": 3,
+        "match_id": "match-CombatLogExample",
+        "player_name": "Le\u00f3n0722",
+        "team_id": 1,
+        "role": "Solo",
+        "god_id": 243,
+        "god_name": "Amaterasu"
+      },
+      {
+        "player_id": 4,
+        "match_id": "match-CombatLogExample",
+        "player_name": "HadesHairyLog",
+        "team_id": 1,
+        "role": "Support",
+        "god_id": 333,
+        "god_name": "Sobek"
+      },
+      {
+        "player_id": 5,
+        "match_id": "match-CombatLogExample",
+        "player_name": "Taco",
+        "team_id": 1,
+        "role": "Middle",
+        "god_id": 12,
+        "god_name": "Neith"
+      }
+    ]
+  },
+  "entities": {
+    "columns": [
+      {
+        "name": "entity_id",
+        "type": "INTEGER",
+        "notnull": true,
+        "pk": true,
+        "default": null
+      },
+      {
+        "name": "match_id",
+        "type": "VARCHAR",
+        "notnull": false,
+        "pk": false,
+        "default": null
+      },
+      {
+        "name": "entity_name",
+        "type": "VARCHAR",
+        "notnull": true,
+        "pk": false,
+        "default": null
+      },
+      {
+        "name": "entity_type",
+        "type": "VARCHAR",
+        "notnull": false,
+        "pk": false,
+        "default": null
+      },
+      {
+        "name": "team_id",
+        "type": "INTEGER",
+        "notnull": false,
+        "pk": false,
+        "default": null
+      }
+    ],
+    "foreign_keys": [
+      {
+        "from": "match_id",
+        "to": "match_id",
+        "table": "matches"
+      }
+    ],
+    "sample_data": [
+      {
+        "entity_id": 1,
+        "match_id": "match-CombatLogExample",
+        "entity_name": "Alpha Chimera",
+        "entity_type": "jungle",
+        "team_id": null
+      },
+      {
+        "entity_id": 2,
+        "match_id": "match-CombatLogExample",
+        "entity_name": "Gold Fury",
+        "entity_type": "jungle",
+        "team_id": null
+      },
+      {
+        "entity_id": 3,
+        "match_id": "match-CombatLogExample",
+        "entity_name": "Champion Swordsman",
+        "entity_type": "minion",
+        "team_id": null
+      },
+      {
+        "entity_id": 4,
+        "match_id": "match-CombatLogExample",
+        "entity_name": "psychotic8BALL",
+        "entity_type": "player",
+        "team_id": 1
+      },
+      {
+        "entity_id": 5,
+        "match_id": "match-CombatLogExample",
+        "entity_name": "Roaming Harpy",
+        "entity_type": "jungle",
+        "team_id": null
+      }
+    ]
+  },
+  "abilities": {
+    "columns": [
+      {
+        "name": "ability_id",
+        "type": "INTEGER",
+        "notnull": true,
+        "pk": true,
+        "default": null
+      },
+      {
+        "name": "match_id",
+        "type": "VARCHAR",
+        "notnull": true,
+        "pk": false,
+        "default": null
+      },
+      {
+        "name": "ability_name",
+        "type": "VARCHAR",
+        "notnull": true,
+        "pk": false,
+        "default": null
+      },
+      {
+        "name": "ability_source",
+        "type": "VARCHAR",
+        "notnull": false,
+        "pk": false,
+        "default": null
+      }
+    ],
+    "foreign_keys": [
+      {
+        "from": "match_id",
+        "to": "match_id",
+        "table": "matches"
+      }
+    ],
+    "sample_data": [
+      {
+        "ability_id": 1,
+        "match_id": "match-CombatLogExample",
+        "ability_name": "Astral Strike",
+        "ability_source": "psychotic8BALL"
+      },
+      {
+        "ability_id": 2,
+        "match_id": "match-CombatLogExample",
+        "ability_name": "Brutalize",
+        "ability_source": "Shaka239"
+      },
+      {
+        "ability_id": 3,
+        "match_id": "match-CombatLogExample",
+        "ability_name": "Bumba's Cudgel",
+        "ability_source": "Shaka239"
+      },
+      {
+        "ability_id": 4,
+        "match_id": "match-CombatLogExample",
+        "ability_name": "Spear",
+        "ability_source": "Satyr"
+      },
+      {
+        "ability_id": 5,
+        "match_id": "match-CombatLogExample",
+        "ability_name": "Athena Basic Attack",
+        "ability_source": "AMIRHISOKA"
+      }
+    ]
+  },
+  "combat_events": {
+    "columns": [
+      {
+        "name": "event_id",
+        "type": "INTEGER",
+        "notnull": true,
+        "pk": true,
+        "default": null
+      },
+      {
+        "name": "match_id",
+        "type": "VARCHAR",
+        "notnull": false,
+        "pk": false,
+        "default": null
+      },
+      {
+        "name": "event_time",
+        "type": "DATETIME",
+        "notnull": true,
+        "pk": false,
+        "default": null
+      },
+      {
+        "name": "timestamp",
+        "type": "DATETIME",
+        "notnull": false,
+        "pk": false,
+        "default": null
+      },
+      {
+        "name": "event_type",
+        "type": "VARCHAR",
+        "notnull": true,
+        "pk": false,
+        "default": null
+      },
+      {
+        "name": "source_entity",
+        "type": "VARCHAR",
+        "notnull": false,
+        "pk": false,
+        "default": null
+      },
+      {
+        "name": "target_entity",
+        "type": "VARCHAR",
+        "notnull": false,
+        "pk": false,
+        "default": null
+      },
+      {
+        "name": "ability_name",
+        "type": "VARCHAR",
+        "notnull": false,
+        "pk": false,
+        "default": null
+      },
+      {
+        "name": "location_x",
+        "type": "FLOAT",
+        "notnull": false,
+        "pk": false,
+        "default": null
+      },
+      {
+        "name": "location_y",
+        "type": "FLOAT",
+        "notnull": false,
+        "pk": false,
+        "default": null
+      },
+      {
+        "name": "damage_amount",
+        "type": "INTEGER",
+        "notnull": false,
+        "pk": false,
+        "default": null
+      },
+      {
+        "name": "damage_mitigated",
+        "type": "INTEGER",
+        "notnull": false,
+        "pk": false,
+        "default": null
+      },
+      {
+        "name": "event_text",
+        "type": "TEXT",
+        "notnull": false,
+        "pk": false,
+        "default": null
+      }
+    ],
+    "foreign_keys": [
+      {
+        "from": "match_id",
+        "to": "match_id",
+        "table": "matches"
+      }
+    ],
+    "sample_data": [
+      {
+        "event_id": 1,
+        "match_id": "match-CombatLogExample",
+        "event_time": "2025-03-19 03:44:48.000000",
+        "timestamp": "2025-03-19 03:44:48.000000",
+        "event_type": "Damage",
+        "source_entity": "psychotic8BALL",
+        "target_entity": "Alpha Chimera",
+        "ability_name": "Astral Strike",
+        "location_x": -2512.264713,
+        "location_y": -6313.249757,
+        "damage_amount": 57,
+        "damage_mitigated": 15,
+        "event_text": "psychotic8BALL hit Alpha Chimera for 57 damage (15 mitigated)."
+      },
+      {
+        "event_id": 2,
+        "match_id": "match-CombatLogExample",
+        "event_time": "2025-03-19 03:44:48.000000",
+        "timestamp": "2025-03-19 03:44:48.000000",
+        "event_type": "Damage",
+        "source_entity": "psychotic8BALL",
+        "target_entity": "Alpha Chimera",
+        "ability_name": "Astral Strike",
+        "location_x": -2512.264713,
+        "location_y": -6313.249757,
+        "damage_amount": 5,
+        "damage_mitigated": 1,
+        "event_text": "psychotic8BALL hit Alpha Chimera for 5 damage (1 mitigated)."
+      },
+      {
+        "event_id": 3,
+        "match_id": "match-CombatLogExample",
+        "event_time": "2025-03-19 03:44:48.000000",
+        "timestamp": "2025-03-19 03:44:48.000000",
+        "event_type": "CrowdControl",
+        "source_entity": "psychotic8BALL",
+        "target_entity": "Alpha Chimera",
+        "ability_name": "Astral Strike",
+        "location_x": -2512.264713,
+        "location_y": -6313.249757,
+        "damage_amount": 0,
+        "damage_mitigated": 0,
+        "event_text": "psychotic8BALL None Alpha Chimera."
+      },
+      {
+        "event_id": 4,
+        "match_id": "match-CombatLogExample",
+        "event_time": "2025-03-19 03:44:48.000000",
+        "timestamp": "2025-03-19 03:44:48.000000",
+        "event_type": "Damage",
+        "source_entity": "psychotic8BALL",
+        "target_entity": "Chimera",
+        "ability_name": "Astral Strike",
+        "location_x": -2663.068936,
+        "location_y": -6265.730433,
+        "damage_amount": 51,
+        "damage_mitigated": 7,
+        "event_text": "psychotic8BALL hit Chimera for 51 damage (7 mitigated)."
+      },
+      {
+        "event_id": 5,
+        "match_id": "match-CombatLogExample",
+        "event_time": "2025-03-19 03:44:48.000000",
+        "timestamp": "2025-03-19 03:44:48.000000",
+        "event_type": "Damage",
+        "source_entity": "psychotic8BALL",
+        "target_entity": "Chimera",
+        "ability_name": "Astral Strike",
+        "location_x": -2663.068936,
+        "location_y": -6265.730433,
+        "damage_amount": 5,
+        "damage_mitigated": 0,
+        "event_text": "psychotic8BALL hit Chimera for 5 damage (0 mitigated)."
+      }
+    ]
+  },
+  "reward_events": {
+    "columns": [
+      {
+        "name": "event_id",
+        "type": "INTEGER",
+        "notnull": true,
+        "pk": true,
+        "default": null
+      },
+      {
+        "name": "match_id",
+        "type": "VARCHAR",
+        "notnull": false,
+        "pk": false,
+        "default": null
+      },
+      {
+        "name": "event_time",
+        "type": "DATETIME",
+        "notnull": true,
+        "pk": false,
+        "default": null
+      },
+      {
+        "name": "timestamp",
+        "type": "DATETIME",
+        "notnull": false,
+        "pk": false,
+        "default": null
+      },
+      {
+        "name": "event_type",
+        "type": "VARCHAR",
+        "notnull": true,
+        "pk": false,
+        "default": null
+      },
+      {
+        "name": "entity_name",
+        "type": "VARCHAR",
+        "notnull": false,
+        "pk": false,
+        "default": null
+      },
+      {
+        "name": "location_x",
+        "type": "FLOAT",
+        "notnull": false,
+        "pk": false,
+        "default": null
+      },
+      {
+        "name": "location_y",
+        "type": "FLOAT",
+        "notnull": false,
+        "pk": false,
+        "default": null
+      },
+      {
+        "name": "reward_amount",
+        "type": "INTEGER",
+        "notnull": false,
+        "pk": false,
+        "default": null
+      },
+      {
+        "name": "source_type",
+        "type": "VARCHAR",
+        "notnull": false,
+        "pk": false,
+        "default": null
+      },
+      {
+        "name": "event_text",
+        "type": "TEXT",
+        "notnull": false,
+        "pk": false,
+        "default": null
+      }
+    ],
+    "foreign_keys": [
+      {
+        "from": "match_id",
+        "to": "match_id",
+        "table": "matches"
+      }
+    ],
+    "sample_data": [
+      {
+        "event_id": 1,
+        "match_id": "match-CombatLogExample",
+        "event_time": "2025-03-19 03:44:49.000000",
+        "timestamp": "2025-03-19 03:44:49.000000",
+        "event_type": "Experience",
+        "entity_name": "Satyr",
+        "location_x": -2261.557257,
+        "location_y": 6476.152135,
+        "reward_amount": 18,
+        "source_type": "experience",
+        "event_text": "Satyr  awarded Le\u00f3n0722 with 18 experience"
+      },
+      {
+        "event_id": 2,
+        "match_id": "match-CombatLogExample",
+        "event_time": "2025-03-19 03:44:49.000000",
+        "timestamp": "2025-03-19 03:44:49.000000",
+        "event_type": "Currency",
+        "entity_name": "Satyr",
+        "location_x": -2261.557257,
+        "location_y": 6476.152135,
+        "reward_amount": 11,
+        "source_type": "gold",
+        "event_text": "Satyr  awarded Le\u00f3n0722 with 11 gold"
+      },
+      {
+        "event_id": 3,
+        "match_id": "match-CombatLogExample",
+        "event_time": "2025-03-19 03:44:49.000000",
+        "timestamp": "2025-03-19 03:44:49.000000",
+        "event_type": "Experience",
+        "entity_name": "Satyr",
+        "location_x": -2482.273859,
+        "location_y": 6363.525605,
+        "reward_amount": 18,
+        "source_type": "experience",
+        "event_text": "Satyr  awarded Shaka239 with 18 experience"
+      },
+      {
+        "event_id": 4,
+        "match_id": "match-CombatLogExample",
+        "event_time": "2025-03-19 03:44:49.000000",
+        "timestamp": "2025-03-19 03:44:49.000000",
+        "event_type": "Currency",
+        "entity_name": "Satyr",
+        "location_x": -2482.273859,
+        "location_y": 6363.525605,
+        "reward_amount": 9,
+        "source_type": "gold",
+        "event_text": "Satyr  awarded Shaka239 with 9 gold"
+      },
+      {
+        "event_id": 5,
+        "match_id": "match-CombatLogExample",
+        "event_time": "2025-03-19 03:44:49.000000",
+        "timestamp": "2025-03-19 03:44:49.000000",
+        "event_type": "Experience",
+        "entity_name": "Satyr",
+        "location_x": -2261.557257,
+        "location_y": 6476.152135,
+        "reward_amount": 18,
+        "source_type": "experience",
+        "event_text": "Satyr  awarded Le\u00f3n0722 with 18 experience"
+      }
+    ]
+  },
+  "item_events": {
+    "columns": [
+      {
+        "name": "event_id",
+        "type": "INTEGER",
+        "notnull": true,
+        "pk": true,
+        "default": null
+      },
+      {
+        "name": "match_id",
+        "type": "VARCHAR",
+        "notnull": false,
+        "pk": false,
+        "default": null
+      },
+      {
+        "name": "event_time",
+        "type": "DATETIME",
+        "notnull": true,
+        "pk": false,
+        "default": null
+      },
+      {
+        "name": "timestamp",
+        "type": "DATETIME",
+        "notnull": false,
+        "pk": false,
+        "default": null
+      },
+      {
+        "name": "event_type",
+        "type": "VARCHAR",
+        "notnull": false,
+        "pk": false,
+        "default": null
+      },
+      {
+        "name": "player_name",
+        "type": "VARCHAR",
+        "notnull": false,
+        "pk": false,
+        "default": null
+      },
+      {
+        "name": "item_id",
+        "type": "INTEGER",
+        "notnull": false,
+        "pk": false,
+        "default": null
+      },
+      {
+        "name": "item_name",
+        "type": "VARCHAR",
+        "notnull": false,
+        "pk": false,
+        "default": null
+      },
+      {
+        "name": "location_x",
+        "type": "FLOAT",
+        "notnull": false,
+        "pk": false,
+        "default": null
+      },
+      {
+        "name": "location_y",
+        "type": "FLOAT",
+        "notnull": false,
+        "pk": false,
+        "default": null
+      },
+      {
+        "name": "cost",
+        "type": "INTEGER",
+        "notnull": false,
+        "pk": false,
+        "default": null
+      },
+      {
+        "name": "event_text",
+        "type": "TEXT",
+        "notnull": false,
+        "pk": false,
+        "default": null
+      }
+    ],
+    "foreign_keys": [
+      {
+        "from": "match_id",
+        "to": "match_id",
+        "table": "matches"
+      }
+    ],
+    "sample_data": [
+      {
+        "event_id": 1,
+        "match_id": "match-CombatLogExample",
+        "event_time": "2025-03-19 03:43:00.000000",
+        "timestamp": "2025-03-19 03:43:00.000000",
+        "event_type": "ItemPurchase",
+        "player_name": "LieBird",
+        "item_id": 1894,
+        "item_name": "Blink Rune",
+        "location_x": 10640.188855,
+        "location_y": 308.3927,
+        "cost": 894,
+        "event_text": "LieBird purchased Blink Rune (894)"
+      },
+      {
+        "event_id": 2,
+        "match_id": "match-CombatLogExample",
+        "event_time": "2025-03-19 03:43:04.000000",
+        "timestamp": "2025-03-19 03:43:04.000000",
+        "event_type": "ItemPurchase",
+        "player_name": "talib6nds",
+        "item_id": 1894,
+        "item_name": "Blink Rune",
+        "location_x": 10640.288299,
+        "location_y": -308.392517,
+        "cost": 894,
+        "event_text": "talib6nds purchased Blink Rune (894)"
+      },
+      {
+        "event_id": 3,
+        "match_id": "match-CombatLogExample",
+        "event_time": "2025-03-19 03:43:05.000000",
+        "timestamp": "2025-03-19 03:43:05.000000",
+        "event_type": "ItemPurchase",
+        "player_name": "Taco",
+        "item_id": 184,
+        "item_name": "Purification Beads",
+        "location_x": -10522.850607,
+        "location_y": -1e-06,
+        "cost": 184,
+        "event_text": "Taco purchased Purification Beads (184)"
+      },
+      {
+        "event_id": 4,
+        "match_id": "match-CombatLogExample",
+        "event_time": "2025-03-19 03:43:07.000000",
+        "timestamp": "2025-03-19 03:43:07.000000",
+        "event_type": "ItemPurchase",
+        "player_name": "Shaka239",
+        "item_id": 1936,
+        "item_name": "Bumba's Cudgel",
+        "location_x": -10640.188855,
+        "location_y": 308.3927,
+        "cost": 936,
+        "event_text": "Shaka239 purchased Bumba's Cudgel (936)"
+      },
+      {
+        "event_id": 5,
+        "match_id": "match-CombatLogExample",
+        "event_time": "2025-03-19 03:43:09.000000",
+        "timestamp": "2025-03-19 03:43:09.000000",
+        "event_type": "ItemPurchase",
+        "player_name": "Shaka239",
+        "item_id": 141,
+        "item_name": "Axe",
+        "location_x": -10640.188855,
+        "location_y": 308.3927,
+        "cost": 141,
+        "event_text": "Shaka239 purchased Axe (141)"
+      }
+    ]
+  },
+  "player_events": {
+    "columns": [
+      {
+        "name": "event_id",
+        "type": "INTEGER",
+        "notnull": true,
+        "pk": true,
+        "default": null
+      },
+      {
+        "name": "match_id",
+        "type": "VARCHAR",
+        "notnull": false,
+        "pk": false,
+        "default": null
+      },
+      {
+        "name": "event_time",
+        "type": "DATETIME",
+        "notnull": true,
+        "pk": false,
+        "default": null
+      },
+      {
+        "name": "timestamp",
+        "type": "DATETIME",
+        "notnull": false,
+        "pk": false,
+        "default": null
+      },
+      {
+        "name": "event_type",
+        "type": "VARCHAR",
+        "notnull": true,
+        "pk": false,
+        "default": null
+      },
+      {
+        "name": "player_name",
+        "type": "VARCHAR",
+        "notnull": false,
+        "pk": false,
+        "default": null
+      },
+      {
+        "name": "entity_name",
+        "type": "VARCHAR",
+        "notnull": false,
+        "pk": false,
+        "default": null
+      },
+      {
+        "name": "team_id",
+        "type": "INTEGER",
+        "notnull": false,
+        "pk": false,
+        "default": null
+      },
+      {
+        "name": "value",
+        "type": "VARCHAR",
+        "notnull": false,
+        "pk": false,
+        "default": null
+      },
+      {
+        "name": "item_id",
+        "type": "INTEGER",
+        "notnull": false,
+        "pk": false,
+        "default": null
+      },
+      {
+        "name": "item_name",
+        "type": "VARCHAR",
+        "notnull": false,
+        "pk": false,
+        "default": null
+      },
+      {
+        "name": "location_x",
+        "type": "FLOAT",
+        "notnull": false,
+        "pk": false,
+        "default": null
+      },
+      {
+        "name": "location_y",
+        "type": "FLOAT",
+        "notnull": false,
+        "pk": false,
+        "default": null
+      },
+      {
+        "name": "event_text",
+        "type": "TEXT",
+        "notnull": false,
+        "pk": false,
+        "default": null
+      }
+    ],
+    "foreign_keys": [
+      {
+        "from": "match_id",
+        "to": "match_id",
+        "table": "matches"
+      }
+    ],
+    "sample_data": [
+      {
+        "event_id": 1,
+        "match_id": "match-CombatLogExample",
+        "event_time": "2025-03-19 03:38:15.000000",
+        "timestamp": "2025-03-19 03:38:15.000000",
+        "event_type": "RoleAssigned",
+        "player_name": "Shaka239",
+        "entity_name": "Shaka239",
+        "team_id": 1,
+        "value": "1",
+        "item_id": 0,
+        "item_name": "EJungle",
+        "location_x": -10500.0,
+        "location_y": 0.0,
+        "event_text": "<MISSING STRING TABLE ENTRY>"
+      },
+      {
+        "event_id": 2,
+        "match_id": "match-CombatLogExample",
+        "event_time": "2025-03-19 03:38:15.000000",
+        "timestamp": "2025-03-19 03:38:15.000000",
+        "event_type": "RoleAssigned",
+        "player_name": "psychotic8BALL",
+        "entity_name": "psychotic8BALL",
+        "team_id": 1,
+        "value": "1",
+        "item_id": 0,
+        "item_name": "ECarry",
+        "location_x": -10500.0,
+        "location_y": 0.0,
+        "event_text": "<MISSING STRING TABLE ENTRY>"
+      },
+      {
+        "event_id": 3,
+        "match_id": "match-CombatLogExample",
+        "event_time": "2025-03-19 03:38:15.000000",
+        "timestamp": "2025-03-19 03:38:15.000000",
+        "event_type": "RoleAssigned",
+        "player_name": "Le\u00f3n0722",
+        "entity_name": "Le\u00f3n0722",
+        "team_id": 1,
+        "value": "1",
+        "item_id": 0,
+        "item_name": "ESolo",
+        "location_x": -10500.0,
+        "location_y": 0.0,
+        "event_text": "<MISSING STRING TABLE ENTRY>"
+      },
+      {
+        "event_id": 4,
+        "match_id": "match-CombatLogExample",
+        "event_time": "2025-03-19 03:38:15.000000",
+        "timestamp": "2025-03-19 03:38:15.000000",
+        "event_type": "RoleAssigned",
+        "player_name": "HadesHairyLog",
+        "entity_name": "HadesHairyLog",
+        "team_id": 1,
+        "value": "1",
+        "item_id": 0,
+        "item_name": "ESupport",
+        "location_x": -10500.0,
+        "location_y": 0.0,
+        "event_text": "<MISSING STRING TABLE ENTRY>"
+      },
+      {
+        "event_id": 5,
+        "match_id": "match-CombatLogExample",
+        "event_time": "2025-03-19 03:38:15.000000",
+        "timestamp": "2025-03-19 03:38:15.000000",
+        "event_type": "RoleAssigned",
+        "player_name": "Taco",
+        "entity_name": "Taco",
+        "team_id": 1,
+        "value": "1",
+        "item_id": 0,
+        "item_name": "EMiddle",
+        "location_x": -10500.0,
+        "location_y": 0.0,
+        "event_text": "<MISSING STRING TABLE ENTRY>"
+      }
+    ]
+  },
+  "player_stats": {
+    "columns": [
+      {
+        "name": "stat_id",
+        "type": "INTEGER",
+        "notnull": true,
+        "pk": true,
+        "default": null
+      },
+      {
+        "name": "match_id",
+        "type": "VARCHAR",
+        "notnull": false,
+        "pk": false,
+        "default": null
+      },
+      {
+        "name": "player_name",
+        "type": "VARCHAR",
+        "notnull": true,
+        "pk": false,
+        "default": null
+      },
+      {
+        "name": "team_id",
+        "type": "INTEGER",
+        "notnull": false,
+        "pk": false,
+        "default": null
+      },
+      {
+        "name": "kills",
+        "type": "INTEGER",
+        "notnull": false,
+        "pk": false,
+        "default": null
+      },
+      {
+        "name": "deaths",
+        "type": "INTEGER",
+        "notnull": false,
+        "pk": false,
+        "default": null
+      },
+      {
+        "name": "assists",
+        "type": "INTEGER",
+        "notnull": false,
+        "pk": false,
+        "default": null
+      },
+      {
+        "name": "damage_dealt",
+        "type": "INTEGER",
+        "notnull": false,
+        "pk": false,
+        "default": null
+      },
+      {
+        "name": "damage_taken",
+        "type": "INTEGER",
+        "notnull": false,
+        "pk": false,
+        "default": null
+      },
+      {
+        "name": "healing_done",
+        "type": "INTEGER",
+        "notnull": false,
+        "pk": false,
+        "default": null
+      },
+      {
+        "name": "damage_mitigated",
+        "type": "INTEGER",
+        "notnull": false,
+        "pk": false,
+        "default": null
+      },
+      {
+        "name": "gold_earned",
+        "type": "INTEGER",
+        "notnull": false,
+        "pk": false,
+        "default": null
+      },
+      {
+        "name": "experience_earned",
+        "type": "INTEGER",
+        "notnull": false,
+        "pk": false,
+        "default": null
+      },
+      {
+        "name": "cc_time_inflicted",
+        "type": "INTEGER",
+        "notnull": false,
+        "pk": false,
+        "default": null
+      },
+      {
+        "name": "structure_damage",
+        "type": "INTEGER",
+        "notnull": false,
+        "pk": false,
+        "default": null
+      }
+    ],
+    "foreign_keys": [
+      {
+        "from": "match_id",
+        "to": "match_id",
+        "table": "matches"
+      }
+    ],
+    "sample_data": [
+      {
+        "stat_id": 1,
+        "match_id": "match-CombatLogExample",
+        "player_name": "Taco",
+        "team_id": 1,
+        "kills": 3,
+        "deaths": 5,
+        "assists": 7,
+        "damage_dealt": 99710,
+        "damage_taken": 23602,
+        "healing_done": 4997,
+        "damage_mitigated": 9921,
+        "gold_earned": 8914,
+        "experience_earned": 20736,
+        "cc_time_inflicted": 252,
+        "structure_damage": 0
+      },
+      {
+        "stat_id": 2,
+        "match_id": "match-CombatLogExample",
+        "player_name": "Shaka239",
+        "team_id": 1,
+        "kills": 15,
+        "deaths": 9,
+        "assists": 6,
+        "damage_dealt": 80176,
+        "damage_taken": 30656,
+        "healing_done": 2764,
+        "damage_mitigated": 27338,
+        "gold_earned": 12596,
+        "experience_earned": 22261,
+        "cc_time_inflicted": 28,
+        "structure_damage": 0
+      },
+      {
+        "stat_id": 3,
+        "match_id": "match-CombatLogExample",
+        "player_name": "HadesHairyLog",
+        "team_id": 1,
+        "kills": 1,
+        "deaths": 12,
+        "assists": 7,
+        "damage_dealt": 29886,
+        "damage_taken": 27108,
+        "healing_done": 2202,
+        "damage_mitigated": 37038,
+        "gold_earned": 6467,
+        "experience_earned": 12873,
+        "cc_time_inflicted": 190,
+        "structure_damage": 160
+      },
+      {
+        "stat_id": 4,
+        "match_id": "match-CombatLogExample",
+        "player_name": "Le\u00f3n0722",
+        "team_id": 1,
+        "kills": 4,
+        "deaths": 8,
+        "assists": 5,
+        "damage_dealt": 89981,
+        "damage_taken": 28122,
+        "healing_done": 3101,
+        "damage_mitigated": 20332,
+        "gold_earned": 7621,
+        "experience_earned": 18142,
+        "cc_time_inflicted": 48,
+        "structure_damage": 0
+      },
+      {
+        "stat_id": 5,
+        "match_id": "match-CombatLogExample",
+        "player_name": "LieBird",
+        "team_id": 2,
+        "kills": 12,
+        "deaths": 5,
+        "assists": 16,
+        "damage_dealt": 95049,
+        "damage_taken": 20359,
+        "healing_done": 2390,
+        "damage_mitigated": 15081,
+        "gold_earned": 11486,
+        "experience_earned": 20216,
+        "cc_time_inflicted": 100,
+        "structure_damage": 8524
+      }
+    ]
+  },
+  "timeline_events": {
+    "columns": [
+      {
+        "name": "event_id",
+        "type": "INTEGER",
+        "notnull": true,
+        "pk": true,
+        "default": null
+      },
+      {
+        "name": "match_id",
+        "type": "VARCHAR",
+        "notnull": false,
+        "pk": false,
+        "default": null
+      },
+      {
+        "name": "event_time",
+        "type": "DATETIME",
+        "notnull": true,
+        "pk": false,
+        "default": null
+      },
+      {
+        "name": "timestamp",
+        "type": "DATETIME",
+        "notnull": false,
+        "pk": false,
+        "default": null
+      },
+      {
+        "name": "game_time_seconds",
+        "type": "INTEGER",
+        "notnull": false,
+        "pk": false,
+        "default": null
+      },
+      {
+        "name": "event_type",
+        "type": "VARCHAR",
+        "notnull": true,
+        "pk": false,
+        "default": null
+      },
+      {
+        "name": "event_category",
+        "type": "VARCHAR",
+        "notnull": false,
+        "pk": false,
+        "default": null
+      },
+      {
+        "name": "importance",
+        "type": "INTEGER",
+        "notnull": false,
+        "pk": false,
+        "default": null
+      },
+      {
+        "name": "event_description",
+        "type": "TEXT",
+        "notnull": false,
+        "pk": false,
+        "default": null
+      },
+      {
+        "name": "entity_name",
+        "type": "VARCHAR",
+        "notnull": false,
+        "pk": false,
+        "default": null
+      },
+      {
+        "name": "target_name",
+        "type": "VARCHAR",
+        "notnull": false,
+        "pk": false,
+        "default": null
+      },
+      {
+        "name": "team_id",
+        "type": "INTEGER",
+        "notnull": false,
+        "pk": false,
+        "default": null
+      },
+      {
+        "name": "location_x",
+        "type": "FLOAT",
+        "notnull": false,
+        "pk": false,
+        "default": null
+      },
+      {
+        "name": "location_y",
+        "type": "FLOAT",
+        "notnull": false,
+        "pk": false,
+        "default": null
+      },
+      {
+        "name": "value",
+        "type": "INTEGER",
+        "notnull": false,
+        "pk": false,
+        "default": null
+      },
+      {
+        "name": "related_event_id",
+        "type": "INTEGER",
+        "notnull": false,
+        "pk": false,
+        "default": null
+      },
+      {
+        "name": "other_entities",
+        "type": "TEXT",
+        "notnull": false,
+        "pk": false,
+        "default": null
+      },
+      {
+        "name": "event_details",
+        "type": "TEXT",
+        "notnull": false,
+        "pk": false,
+        "default": null
+      }
+    ],
+    "foreign_keys": [
+      {
+        "from": "related_event_id",
+        "to": "event_id",
+        "table": "timeline_events"
+      },
+      {
+        "from": "match_id",
+        "to": "match_id",
+        "table": "matches"
+      }
+    ],
+    "sample_data": [
+      {
+        "event_id": 1,
+        "match_id": "match-CombatLogExample",
+        "event_time": "2025-03-19 03:46:08.000000",
+        "timestamp": "2025-03-19 03:46:08.000000",
+        "game_time_seconds": 473,
+        "event_type": "PlayerKill",
+        "event_category": "Combat",
+        "importance": 7,
+        "event_description": "Shaka239 killed LieBird",
+        "entity_name": "Shaka239",
+        "target_name": "LieBird",
+        "team_id": 1,
+        "location_x": 2253.107115,
+        "location_y": -7496.788285,
+        "value": 1,
+        "related_event_id": null,
+        "other_entities": null,
+        "event_details": null
+      },
+      {
+        "event_id": 2,
+        "match_id": "match-CombatLogExample",
+        "event_time": "2025-03-19 03:46:12.000000",
+        "timestamp": "2025-03-19 03:46:12.000000",
+        "game_time_seconds": 477,
+        "event_type": "PlayerKill",
+        "event_category": "Combat",
+        "importance": 7,
+        "event_description": "MateoUwU killed Shaka239 (Assists: LieBird)",
+        "entity_name": "MateoUwU",
+        "target_name": "Shaka239",
+        "team_id": 2,
+        "location_x": 1559.216748,
+        "location_y": -7490.286269,
+        "value": 1,
+        "related_event_id": null,
+        "other_entities": "LieBird",
+        "event_details": null
+      },
+      {
+        "event_id": 3,
+        "match_id": "match-CombatLogExample",
+        "event_time": "2025-03-19 03:46:39.000000",
+        "timestamp": "2025-03-19 03:46:39.000000",
+        "game_time_seconds": 504,
+        "event_type": "PlayerKill",
+        "event_category": "Combat",
+        "importance": 7,
+        "event_description": "AMIRHISOKA killed psychotic8BALL (Assists: MateoUwU)",
+        "entity_name": "AMIRHISOKA",
+        "target_name": "psychotic8BALL",
+        "team_id": 2,
+        "location_x": -2888.765054,
+        "location_y": -8093.155758,
+        "value": 1,
+        "related_event_id": null,
+        "other_entities": "MateoUwU",
+        "event_details": null
+      },
+      {
+        "event_id": 4,
+        "match_id": "match-CombatLogExample",
+        "event_time": "2025-03-19 03:48:05.000000",
+        "timestamp": "2025-03-19 03:48:05.000000",
+        "game_time_seconds": 590,
+        "event_type": "PlayerKill",
+        "event_category": "Combat",
+        "importance": 7,
+        "event_description": "LieBird killed psychotic8BALL (Assists: MateoUwU)",
+        "entity_name": "LieBird",
+        "target_name": "psychotic8BALL",
+        "team_id": 2,
+        "location_x": -331.731369,
+        "location_y": -8358.000627,
+        "value": 1,
+        "related_event_id": null,
+        "other_entities": "MateoUwU",
+        "event_details": null
+      },
+      {
+        "event_id": 5,
+        "match_id": "match-CombatLogExample",
+        "event_time": "2025-03-19 03:48:09.000000",
+        "timestamp": "2025-03-19 03:48:09.000000",
+        "game_time_seconds": 594,
+        "event_type": "PlayerKill",
+        "event_category": "Combat",
+        "importance": 7,
+        "event_description": "MateoUwU killed HadesHairyLog (Assists: LieBird)",
+        "entity_name": "MateoUwU",
+        "target_name": "HadesHairyLog",
+        "team_id": 2,
+        "location_x": -1440.954722,
+        "location_y": -8117.745789,
+        "value": 1,
+        "related_event_id": null,
+        "other_entities": "LieBird",
+        "event_details": null
+      }
+    ]
+  }
+}

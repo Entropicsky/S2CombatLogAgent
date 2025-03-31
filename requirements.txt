@@ -1,0 +1,39 @@
+# Core dependencies
+openai>=1.0.0                 # OpenAI API client
+pandas>=2.0.0                 # Data manipulation
+numpy>=1.24.0                 # Numerical operations
+streamlit>=1.27.0             # Web UI
+matplotlib>=3.7.0             # Basic visualization
+plotly>=5.13.0                # Interactive charts
+# PandasAI is now optional - we have a custom implementation
+# See smite2_agent/tools/pandasai_tools.py
+
+# Database
+# sqlite3                     # Built into Python, no pip install needed
+sqlparse>=0.4.3               # SQL parsing and validation
+
+# Testing
+pytest>=7.3.1                 # Testing framework
+pytest-cov>=4.1.0             # Test coverage
+
+# Utilities
+python-dotenv>=1.0.0          # Environment variable management
+requests>=2.30.0              # HTTP requests
+tqdm>=4.65.0                  # Progress bars
+
+# Type checking
+mypy>=1.0.0                   # Type checking
+types-requests>=2.30.0        # Type stubs for requests
+
+# Development tools
+black>=23.3.0                 # Code formatting
+flake8>=6.0.0                 # Linting
+isort>=5.12.0                 # Import sorting
+
+# Additional dependencies
+openpyxl>=3.1.2
+xlsxwriter>=3.1.0
+streamlit-plotly-events==0.0.6
+altair>=5.1.2
+seaborn>=0.12.2
+networkx==3.1 

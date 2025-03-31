@@ -1,0 +1,29 @@
+# Core dependencies
+openai>=1.0.0                 # OpenAI API client
+pandas>=2.0.0                 # Data manipulation
+numpy>=1.24.0                 # Numerical operations
+streamlit>=1.27.0             # Web UI
+matplotlib>=3.7.0             # Basic visualization
+plotly>=5.13.0                # Interactive charts
+pandasai>=3.0.0b2             # PandasAI for data analysis
+
+# Database
+sqlparse>=0.4.3               # SQL parsing and validation
+
+# Testing
+pytest>=7.3.1                 # Testing framework
+pytest-cov>=4.1.0             # Test coverage
+
+# Utilities
+python-dotenv>=1.0.0          # Environment variable management
+requests>=2.30.0              # HTTP requests
+tqdm>=4.65.0                  # Progress bars
+
+# Type checking
+mypy>=1.0.0                   # Type checking
+types-requests>=2.30.0        # Type stubs for requests
+
+# Development tools
+black>=23.3.0                 # Code formatting
+flake8>=6.0.0                 # Linting
+isort>=5.12.0                 # Import sorting 
