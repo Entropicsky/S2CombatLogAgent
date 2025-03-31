@@ -1,0 +1,21 @@
+# OpenAI Agents SDK and dependencies (March 2025)
+openai>=1.23.0                         # OpenAI API client
+openai-agents>=1.0.0                   # OpenAI Agents SDK (March 2025)
+agents-tracing>=1.0.0                  # Tracing for Agents SDK
+
+# Core dependencies
+pandas>=2.0.0                          # Data manipulation
+numpy>=1.24.0                          # Numerical operations
+matplotlib>=3.7.0                      # Visualization
+plotly>=5.13.0                         # Interactive charts
+python-dotenv>=1.0.0                   # Environment variables
+
+# Database
+# sqlite3 is built-in to Python
+sqlparse>=0.4.3                        # SQL parsing
+
+# Our custom PandasAI implementation also requires:
+astor>=0.8.1                           # AST manipulation (for PandasAI)
+duckdb>=0.9.0                          # Database engine (for PandasAI)
+faiss-cpu>=1.7.4                       # Vector similarity search
+jinja2>=3.1.2                          # Template engine 
