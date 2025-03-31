@@ -1,0 +1,9 @@
+run = "bash setup_replit.sh && python run_streamlit.py"
+language = "python3"
+entrypoint = "run_streamlit.py"
+
+[nix]
+channel = "stable-22_11"
+
+[deployment]
+run = ["sh", "-c", "bash setup_replit.sh && python run_streamlit.py"] 

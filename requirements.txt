@@ -13,6 +13,7 @@ plotly>=5.13.0                # Interactive charts
 # Database
 # sqlite3                     # Built into Python, no pip install needed
 sqlparse>=0.4.3               # SQL parsing and validation
+sqlalchemy>=2.0.0             # SQL ORM (used by smite_parser)
 
 # OpenAI Agents SDK
 openai-agents>=1.0.0          # OpenAI Agents SDK (March 2025)
