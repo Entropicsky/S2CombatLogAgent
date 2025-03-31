@@ -1,3 +1,7 @@
+# SMITE 2 Combat Log Agent - Complete Requirements
+# This file includes all dependencies needed to run the entire project
+# Install with: pip install -r requirements.txt
+
 # Core dependencies
 openai>=1.0.0                 # OpenAI API client
 pandas>=2.0.0                 # Data manipulation
@@ -5,35 +9,45 @@ numpy>=1.24.0                 # Numerical operations
 streamlit>=1.27.0             # Web UI
 matplotlib>=3.7.0             # Basic visualization
 plotly>=5.13.0                # Interactive charts
-# PandasAI is now optional - we have a custom implementation
-# See smite2_agent/tools/pandasai_tools.py
 
 # Database
 # sqlite3                     # Built into Python, no pip install needed
 sqlparse>=0.4.3               # SQL parsing and validation
 
-# Testing
-pytest>=7.3.1                 # Testing framework
-pytest-cov>=4.1.0             # Test coverage
+# OpenAI Agents SDK
+openai-agents>=1.0.0          # OpenAI Agents SDK (March 2025)
+agents-tracing>=1.0.0         # Tracing for Agents SDK
+
+# Excel and data export
+openpyxl>=3.1.2               # Excel file handling
+xlsxwriter>=3.1.0             # Excel writing
+
+# Visualization
+altair>=5.1.2                 # Charts for Streamlit
+seaborn>=0.12.2               # Statistical visualizations
+networkx>=3.1                 # Network graphs
+streamlit-plotly-events==0.0.6 # Plotly integration for Streamlit
 
 # Utilities
 python-dotenv>=1.0.0          # Environment variable management
 requests>=2.30.0              # HTTP requests
 tqdm>=4.65.0                  # Progress bars
+watchdog>=3.0.0               # Recommended for better Streamlit performance (install with: pip install watchdog)
+httpx>=0.24.1                 # Async HTTP client
 
-# Type checking
-mypy>=1.0.0                   # Type checking
-types-requests>=2.30.0        # Type stubs for requests
+# Custom PandasAI implementation
+astor>=0.8.1                  # AST manipulation
+duckdb>=0.9.0                 # Database engine
+faiss-cpu>=1.7.4              # Vector similarity search
+jinja2>=3.1.2                 # Template engine
 
-# Development tools
+# Testing (optional for normal users)
+pytest>=7.3.1                 # Testing framework
+pytest-cov>=4.1.0             # Test coverage
+
+# Development tools (optional for normal users)
 black>=23.3.0                 # Code formatting
 flake8>=6.0.0                 # Linting
 isort>=5.12.0                 # Import sorting
-
-# Additional dependencies
-openpyxl>=3.1.2
-xlsxwriter>=3.1.0
-streamlit-plotly-events==0.0.6
-altair>=5.1.2
-seaborn>=0.12.2
-networkx==3.1 
+mypy>=1.0.0                   # Type checking
+types-requests>=2.30.0        # Type stubs for requests 
