@@ -288,9 +288,12 @@ def initialize_session_state():
     
     if "query_history" not in st.session_state:
         st.session_state.query_history = []
-        
+    
     if "pending_question" not in st.session_state:
         st.session_state.pending_question = None
+        
+    if "active_page" not in st.session_state:
+        st.session_state.active_page = "Chat"
 
 
 def upload_and_process_file():
@@ -566,64 +569,98 @@ def debug_panel():
 
 
 def settings_sidebar():
-    """Display settings in the sidebar."""
+    """Create the settings sidebar."""
     with st.sidebar:
-        st.header("Settings")
+        st.title("SMITE 2 Combat Log Agent")
         
-        # API Key setting
-        api_key = st.text_input(
-            "OpenAI API Key", 
-            value=os.environ.get("OPENAI_API_KEY", ""),
-            type="password",
-            help="Enter your OpenAI API key. It will be used for this session only."
+        # Check for API key
+        if not os.environ.get("OPENAI_API_KEY"):
+            st.warning("⚠️ OpenAI API key not set. Please enter your API key below.")
+            api_key = st.text_input("OpenAI API Key", type="password")
+            if api_key:
+                os.environ["OPENAI_API_KEY"] = api_key
+                st.success("✅ API key set successfully!")
+        
+        # File upload
+        st.header("Combat Log File")
+        uploaded_file = st.file_uploader(
+            "Upload a SMITE 2 Combat Log file",
+            type=["log", "txt"],
+            help="Upload a .log or .txt file containing SMITE 2 combat log data",
+            key="file_uploader"
         )
         
-        if api_key:
-            os.environ["OPENAI_API_KEY"] = api_key
-        
-        # Model selection
-        if "model" not in st.session_state:
-            st.session_state.model = "gpt-4o"
-            
-        st.session_state.model = st.selectbox(
-            "Model",
-            options=["gpt-4o", "gpt-4", "gpt-3.5-turbo"],
-            index=0,
-            help="Select the OpenAI model to use for queries."
-        )
-        
-        # Include follow-ups toggle
-        if "include_followups" not in st.session_state:
-            st.session_state.include_followups = True
-            
-        st.session_state.include_followups = st.toggle(
-            "Include follow-up suggestions",
-            value=True,
-            help="Enable to get suggested follow-up questions with each response."
-        )
-        
-        # Reset conversation button
-        if st.button("Reset Conversation"):
-            st.session_state.messages = []
-            st.session_state.debug_info = {}
-            st.session_state.query_history = []
-            st.success("Conversation has been reset.")
-        
-        # Display database info if available
-        if st.session_state.db_path:
-            st.divider()
-            st.subheader("Current Database")
-            st.info(f"Using database: {os.path.basename(st.session_state.db_path)}")
-            
-            # Add button to upload a new file
-            if st.button("Upload New Log File"):
+        if uploaded_file:
+            if st.session_state.uploaded_file != uploaded_file.name:
+                st.session_state.uploaded_file = uploaded_file.name
+                st.session_state.processing_status = "ready"
                 st.session_state.db_path = None
-                st.session_state.processing_status = None
-                st.session_state.uploaded_file = None
                 st.session_state.messages = []
-                st.session_state.debug_info = {}
-                st.session_state.query_history = []
-                st.rerun()
+            
+            if st.session_state.processing_status == "ready":
+                if st.button("Process Log File"):
+                    st.session_state.processing_status = "processing"
+                    st.rerun()
+        
+        # If database is loaded, show export options
+        if st.session_state.db_path:
+            st.header("Database Tools")
+            
+            # Add Excel export option
+            if st.button("Export to Excel"):
+                try:
+                    # Import the export_to_excel function
+                    from scripts.export_to_excel import export_to_excel
+                    
+                    with st.spinner("Exporting to Excel..."):
+                        # Generate export file
+                        excel_path = export_to_excel(str(st.session_state.db_path))
+                        
+                        # Read the generated file
+                        with open(excel_path, "rb") as f:
+                            excel_data = f.read()
+                        
+                        # Offer download link
+                        st.download_button(
+                            label="Download Excel File",
+                            data=excel_data,
+                            file_name=os.path.basename(excel_path),
+                            mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+                        )
+                        
+                        st.success(f"✅ Export successful!")
+                except Exception as e:
+                    st.error(f"❌ Error exporting to Excel: {str(e)}")
+                    st.info("Make sure pandas and openpyxl are installed: pip install pandas openpyxl xlsxwriter")
+            
+            # Add database path display
+            if st.session_state.db_path:
+                st.info(f"Database: {os.path.basename(st.session_state.db_path)}")
+            
+        # Model selection
+        st.header("Settings")
+        model = st.selectbox(
+            "Model",
+            ["gpt-4o", "gpt-4o-mini", "gpt-3.5-turbo"],
+            index=0,
+        )
+        
+        # Follow-up questions toggle
+        include_followups = st.checkbox(
+            "Include follow-up questions",
+            value=True,
+        )
+        
+        # Debug mode
+        show_debug = st.checkbox(
+            "Show debug panel",
+            value=False,
+            key="show_debug"
+        )
+        
+        # Store settings in session state
+        st.session_state.model = model
+        st.session_state.include_followups = include_followups
 
 
 def process_question_with_status(query: str):
@@ -811,6 +848,98 @@ def process_question_with_status(query: str):
         st.rerun()
 
 
+def sql_query_page():
+    """SQL Query page that allows users to write and execute SQL directly."""
+    st.title("SQL Query Tool")
+    
+    if not st.session_state.db_path:
+        st.warning("Please upload a combat log file first to use the SQL Query Tool.")
+        return
+    
+    st.write("Execute SQL queries directly against the combat log database.")
+    
+    # SQL Query input
+    query = st.text_area(
+        "Enter your SQL query:", 
+        height=150,
+        placeholder="SELECT * FROM players LIMIT 10"
+    )
+    
+    # Database schema helper
+    with st.expander("Database Schema Reference"):
+        st.markdown("""
+        ### Main Tables
+        - **matches**: Match metadata and settings
+        - **players**: Player information including names, gods, and teams
+        - **combat_events**: All combat interactions (damage, healing, kills)
+        - **reward_events**: Experience and gold rewards
+        - **item_events**: Item purchases and upgrades
+        - **timeline_events**: Chronological match events with timestamps
+        - **player_stats**: Aggregated player statistics
+        
+        ### Example Queries
+        ```sql
+        -- Get all players
+        SELECT * FROM players
+        
+        -- Get top damage dealers
+        SELECT 
+            source_entity as Player, 
+            SUM(damage_amount) as TotalDamage 
+        FROM combat_events 
+        WHERE damage_amount > 0 
+        GROUP BY source_entity 
+        ORDER BY TotalDamage DESC
+        
+        -- Get ability usage by player
+        SELECT 
+            source_entity as Player,
+            ability_name as Ability,
+            COUNT(*) as UseCount,
+            SUM(damage_amount) as TotalDamage
+        FROM combat_events
+        WHERE ability_name IS NOT NULL
+        GROUP BY source_entity, ability_name
+        ORDER BY Player, TotalDamage DESC
+        ```
+        """)
+    
+    col1, col2 = st.columns([1, 1])
+    execute_button = col1.button("Execute Query")
+    clear_button = col2.button("Clear Results")
+    
+    if execute_button and query:
+        try:
+            import sqlite3
+            import pandas as pd
+            
+            # Execute the query
+            with sqlite3.connect(st.session_state.db_path) as conn:
+                df = pd.read_sql_query(query, conn)
+            
+            # Display the results
+            st.subheader("Query Results")
+            st.dataframe(df)
+            
+            # Add download button for CSV
+            csv = df.to_csv(index=False)
+            st.download_button(
+                label="Download Results as CSV",
+                data=csv,
+                file_name="query_results.csv",
+                mime="text/csv",
+            )
+            
+            # Show row count
+            st.success(f"Query executed successfully. {len(df)} rows returned.")
+            
+        except Exception as e:
+            st.error(f"Error executing query: {str(e)}")
+    
+    if clear_button:
+        st.rerun()
+
+
 def main():
     """Main function to run the Streamlit app."""
     # Set page config
@@ -834,25 +963,74 @@ def main():
         st.session_state.messages.append({"role": "user", "content": question})
         # Process the question
         process_question_with_status(question)
+        # Force a rerun to display the new messages
+        st.rerun()
     
-    # Settings sidebar
+    # Create sidebar
     settings_sidebar()
     
-    # Check for API key
-    if not os.environ.get("OPENAI_API_KEY"):
-        st.warning("⚠️ OpenAI API key not set. Please enter your API key in the sidebar.")
-    
-    # Main interface flow
-    if st.session_state.db_path is None:
-        # Step 1: Upload and process a log file
-        if upload_and_process_file():
-            st.info("You can now ask questions about the combat log data.")
-    else:
-        # Step 2: Chat interface
-        chat_interface()
+    # Handle file processing if needed
+    if st.session_state.processing_status == "processing":
+        # Get the uploaded file from the session state file_uploader widget
+        uploaded_file = st.session_state.file_uploader
         
-        # Step 3: Debug panel
-        debug_panel()
+        if uploaded_file:
+            # Save the uploaded file to a temporary location
+            temp_file = TEMP_DIR / uploaded_file.name
+            with open(temp_file, "wb") as f:
+                f.write(uploaded_file.getbuffer())
+            
+            # Process the log file with a progress bar
+            with st.spinner(f"Processing {uploaded_file.name}..."):
+                try:
+                    db_path = process_log_file(temp_file)
+                    if db_path:
+                        st.session_state.db_path = db_path
+                        st.session_state.processing_status = "complete"
+                        st.success(f"✅ Log file processed successfully!")
+                    else:
+                        st.session_state.processing_status = "error"
+                        st.error("❌ Failed to process log file. Please check the format.")
+                except Exception as e:
+                    st.session_state.processing_status = "error"
+                    st.error(f"❌ Error processing log file: {str(e)}")
+            
+            # Force a rerun to update the UI
+            st.rerun()
+    
+    # Create tabs for different pages
+    tab1, tab2 = st.tabs(["Chat Interface", "SQL Query Tool"])
+    
+    with tab1:
+        # If database exists, show the chat interface
+        if st.session_state.db_path:
+            chat_interface()
+            
+            # Add debug panel at the bottom if desired
+            if st.session_state.get("show_debug", False):
+                debug_panel()
+        else:
+            # Show instructions if no database is loaded yet
+            st.info("👈 Please upload a SMITE 2 Combat Log file using the sidebar to begin.")
+            
+            st.markdown("""
+            ### How to use the SMITE 2 Combat Log Agent:
+            
+            1. Upload your SMITE 2 Combat Log file (.log or .txt) using the sidebar
+            2. Click "Process Log File" to analyze the data
+            3. Once processing is complete, you can:
+               - Ask questions about the match data in natural language
+               - Run SQL queries directly against the database
+               - Export the database to Excel for external analysis
+            
+            ### Example Questions:
+            - "Who dealt the most damage in the match?"
+            - "What abilities did the top player use most frequently?"
+            - "Compare the damage output of the top 3 players"
+            """)
+    
+    with tab2:
+        sql_query_page()
 
 
 if __name__ == "__main__":

@@ -19,6 +19,9 @@ The system processes these questions, extracts relevant data from the combat log
 - **Intelligent Follow-up Questions**: The system automatically suggests and answers follow-up questions
 - **Interactive Web Interface**: Easy-to-use Streamlit application for uploading logs and asking questions
 - **Comprehensive Analysis**: Detailed breakdowns of damage, abilities, player performance, and more
+- **SQL Query Tool**: Write and execute custom SQL queries directly against the combat log database
+- **Excel Export**: Export the entire database to Excel for further analysis in spreadsheet software
+- **CSV Download**: Download SQL query results as CSV files for external processing
 
 ## Architecture
 
@@ -88,13 +91,42 @@ These guardrails prevent "hallucinations" or fabricated data, ensuring all respo
    python run_streamlit.py
    ```
 
-2. Open your browser and navigate to the URL displayed in the console (typically http://localhost:8506)
+2. Open your browser and navigate to the URL displayed in the console (typically http://localhost:8501)
 
 3. Upload a SMITE 2 combat log file using the upload button in the sidebar
 
 4. Type your question in the input field and press Enter
 
 5. Review the response and explore suggested follow-up questions
+
+### Using the SQL Query Tool
+
+1. After uploading and processing a combat log file, switch to the "SQL Query Tool" tab
+
+2. Enter your SQL query in the text area
+   - Reference the provided database schema and example queries
+   - Write any valid SQL SELECT statement
+
+3. Click "Execute Query" to run your query
+
+4. View the results in the table format
+
+5. Download the results as a CSV file using the "Download Results as CSV" button
+
+### Exporting to Excel
+
+1. After uploading and processing a combat log file, locate the "Export to Excel" button in the sidebar under "Database Tools"
+
+2. Click the button to generate a comprehensive Excel file with multiple sheets:
+   - Match Info: Basic match metadata
+   - Players: Player information including gods and teams
+   - Timeline Events: Chronological match events
+   - Combat Events: Sample of combat interactions
+   - Item Events: Item purchases and upgrades
+   - Reward Events: Sample of experience and gold rewards
+   - Player Stats: Aggregated player statistics
+
+3. Download the Excel file using the provided download button
 
 ### Sample Questions
 
@@ -119,6 +151,7 @@ The system works with SQLite databases containing SMITE 2 combat logs with these
 - `reward_events`: Experience and gold rewards
 - `item_events`: Item purchases and upgrades
 - `timeline_events`: Chronological match events with timestamps
+- `player_stats`: Aggregated player statistics
 
 ### Multi-Agent System
 
@@ -138,6 +171,43 @@ The agent uses OpenAI's GPT models in a specialized pipeline architecture:
   - `pipeline/`: Data flow and pipeline implementation
   - `tools/`: SQL, chart, and utility tools
   - `ui/`: Streamlit interface
+- `scripts/`: Utility scripts
+  - `export_to_excel.py`: Database export functionality
+- `smite_parser/`: Combat log parsing module
+
+## Troubleshooting
+
+### Streamlit Version Compatibility
+
+The application requires Streamlit version 1.27.0 or higher. If you encounter errors like:
+
+```
+AttributeError: module 'streamlit' has no attribute 'experimental_rerun'
+```
+
+Update your Streamlit installation:
+
+```bash
+pip install --upgrade streamlit
+```
+
+Note: In newer Streamlit versions, `st.experimental_rerun()` has been replaced with `st.rerun()`.
+
+### Excel Export Issues
+
+If you encounter errors when exporting to Excel:
+
+```bash
+pip install pandas openpyxl xlsxwriter
+```
+
+### Database Path Issues
+
+If the application cannot find the database:
+
+1. Check the console log for the actual database path
+2. Verify the combat log file was processed successfully
+3. Try uploading and processing the file again
 
 ## Future Development
 
@@ -154,6 +224,7 @@ This project uses:
 - OpenAI's GPT models for natural language processing
 - Streamlit for the web interface
 - SQLite for database functionality
+- Pandas, openpyxl and xlsxwriter for data export capabilities
 
 ## License
 
