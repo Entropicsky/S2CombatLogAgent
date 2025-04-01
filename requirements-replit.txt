@@ -1,0 +1,27 @@
+# SMITE 2 Combat Log Agent - Replit Requirements
+# Simplified requirements for Replit deployment
+
+# Core dependencies
+streamlit
+pandas
+numpy
+matplotlib
+plotly
+sqlparse
+sqlalchemy
+tqdm
+openai
+python-dotenv
+requests
+openpyxl
+xlsxwriter
+
+# Visualization
+altair
+seaborn
+networkx
+streamlit-plotly-events==0.0.6
+
+# Utilities
+watchdog
+httpx 
