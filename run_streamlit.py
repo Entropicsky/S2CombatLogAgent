@@ -7,40 +7,44 @@ import os
 import sys
 from pathlib import Path
 
-# Add the parent directory to the path
+def log(msg):
+    print(msg, flush=True)
+
+log("🐍 Starting run_streamlit.py")
+
+log("📂 Imports loaded")
+
 parent_dir = Path(__file__).parent
 sys.path.insert(0, str(parent_dir))
 
-# Run the Streamlit app
+log(f"🔍 Parent dir set: {parent_dir}")
+
 if __name__ == "__main__":
     try:
         import streamlit.web.cli as stcli
         from dotenv import load_dotenv
-        
-        # Load environment variables
+
         load_dotenv()
-        
-        # Construct the path to the Streamlit app
+
         streamlit_app_path = os.path.join(
             parent_dir, "smite2_agent", "ui", "streamlit_app.py"
         )
-        
-        # Check if file exists
+
         if not os.path.exists(streamlit_app_path):
-            print(f"Error: Streamlit app not found at {streamlit_app_path}")
+            log(f"❌ Error: Streamlit app not found at {streamlit_app_path}")
             sys.exit(1)
-        
-        print(f"Starting Streamlit app: {streamlit_app_path}")
-        
-        # Use Streamlit CLI to run the app
+
+        log(f"🚀 Starting Streamlit app: {streamlit_app_path}")
+
         sys.argv = ["streamlit", "run", streamlit_app_path]
-        stcli.main()
-        
+        sys.exit(stcli.main())
+
     except ImportError as e:
-        print(f"Error: Required packages not installed. {e}")
-        print("Please install the required packages with:")
-        print("pip install streamlit python-dotenv")
+        log(f"❌ ImportError: {e}")
+        log("👉 Please install required packages with:")
+        log("   pip install streamlit python-dotenv")
         sys.exit(1)
+
     except Exception as e:
-        print(f"Error starting Streamlit app: {e}")
-        sys.exit(1) 
+        log(f"❌ Unexpected error: {e}")
+        sys.exit(1)

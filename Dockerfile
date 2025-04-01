@@ -45,4 +45,4 @@ VOLUME ["/app/data"]
 HEALTHCHECK CMD curl --fail http://localhost:8501/_stcore/health || exit 1
 
 # Run the Streamlit app
-CMD ["python", "run_streamlit.py"] 
+CMD ["streamlit", "run", "run_streamlit.py", "--server.port=8501", "--server.address=0.0.0.0"]
